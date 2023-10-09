@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sdetlabs.s44</groupId>
+	<artifactId>E2E_JavaMavenGit_JenkinsPipelineInSCM</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>E2E_JavaMavenGit_JenkinsPipelineInSCM</name>
+	<description>E2E_JavaMavenGit_JenkinsPipelineInSCM</description>
+
+	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20230618</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/xerces/xercesImpl -->
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.12.2</version>
+		</dependency>
+
+
+		<!-- enables Maven to use repositories stored in local file system
+		Deploy files and directories to local file system
+		Get files from local file system -->
+		<dependency>
+			<groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-file</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+
+		<!-- Shared Library for wagon providers supporting HTTP. -->
+		<dependency>
+			<groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-http-shared</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.3.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!-- to specify where to deploy the artifacts at the time of deployment -->
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>releases2</id>
+			<name>maven-releases</name>
+			<url>http://localhost:8080/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+
+	<!-- to specify from where dependencies needs to be picked up -->
+	<repositories>
+		<repository>
+			<id>releases2</id>
+			<name>maven-releases</name>
+			<layout>default</layout>
+			<url>http://localhost:8080/repository/maven-releases/</url>
+		</repository>
+	</repositories>
+
+	<!-- 
+	To install to local USE
+	mvn install:install-file -Dfile=<path-to-file> -DpomFile=<path-to-pomfile>
+	-->
+
+</project>
